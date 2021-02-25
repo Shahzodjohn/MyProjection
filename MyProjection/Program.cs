@@ -14,10 +14,11 @@ namespace MyProjection
 
                 switch (ShowMainMenu())
                 {
-                    case "1": 
+                    case "1":
                         {
                             ShowCustomerMenu();
-                        }break;
+                        }
+                        break;
                     case "2":
                         {
 
@@ -28,14 +29,15 @@ namespace MyProjection
 
                         }
                         break;
-                    case "4": isWorking = false;
+                    case "4":
+                        isWorking = false;
                         {
 
                         }
                         break;
                 }
-                bool isWorking2 = true;
-                while (isWorking2)
+                //bool isWorking2 = true;
+                //while (isWorking2)
                 {
                     switch (ShowCustomerMenu())
                     {
@@ -52,11 +54,14 @@ namespace MyProjection
                             {
                                 Console.Clear();
                                 int run;
-                                Console.WriteLine("(1) Войти как админ \n(2) Войти как клиент");
+                                Console.Write("(1) Войти как админ \n(2) Войти как клиент \nChoice = ");
                                 run = int.Parse(Console.ReadLine());
                                 if (run == 1)
                                 {
-                                    string log = "alifbank" ;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Вход в базу администрации...");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    string log = "alifbank";
                                     Console.Write("Введите Логин = ");
                                     log = Console.ReadLine();
                                     string pas;
@@ -74,7 +79,7 @@ namespace MyProjection
                                                           "4. Delete Client\n" +
                                                           "4. Choice:");
                                         int num = int.Parse(Console.ReadLine());
-                                        
+
                                         if (num == 1)
                                         {
                                             var customerModel = CreateCustomerClient();
@@ -86,21 +91,29 @@ namespace MyProjection
                                             Console.WriteLine("Press any key to continue...");
                                             Console.ReadLine();
                                         }
-                                        
                                     }
-                                    if (run == 2)
+                                    else
                                     {
-                                        var customerModel = CreateCustomerClient();
-                                        var result = customerModel.CreateCustomer();
-                                        if (result > 0)
-                                        {
-                                            Console.WriteLine("Customer is added successfully");
-                                        }
-                                        Console.WriteLine("Press any key to continue...");
-                                        Console.ReadLine();
+                                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                                        Console.WriteLine("Ошибка! Введите правильный пароль...");
+                                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                        Console.WriteLine("Press any key to return into the main menu...");
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.ReadKey();
                                     }
                                 }
-                                
+                                if (run == 2)
+                                {
+                                    var customerModel = CreateCustomerClient();
+                                    var result = customerModel.CreateCustomer();
+                                    if (result > 0)
+                                    {
+                                        Console.WriteLine("Customer is added successfully");
+                                    }
+                                    Console.WriteLine("Press any key to continue...");
+                                    Console.ReadLine();
+                                }
+
                             }
                             break;
                         case "3":
@@ -116,13 +129,13 @@ namespace MyProjection
                             break;
                     }
                 }
-                
+
 
             }
-            
+
         }
 
-       
+
 
         static string ShowMainMenu()
         {
@@ -131,14 +144,14 @@ namespace MyProjection
             Console.WriteLine($"{new string('-', 5)}Main Menu{new string('-', 5)}");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("1. Customers\n" +
-                              "2. Accounts\n" + 
-                              "3. Transactions\n" + 
-                              "4. EXIT\n" + 
+                              "2. Accounts\n" +
+                              "3. Transactions\n" +
+                              "4. EXIT\n" +
                               "4. Choice:");
             return Console.ReadLine();
         }
 
-        
+
         static string ShowCustomerMenu()
         {
             Console.Clear();
@@ -173,7 +186,7 @@ namespace MyProjection
             }
             return null;
         }
-       
+
         static string ConsoleWriteWithResult(string text)
         {
             Console.Write(text);
