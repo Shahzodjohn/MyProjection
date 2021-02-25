@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace MyProjection.folder
 {
@@ -46,13 +44,44 @@ namespace MyProjection.folder
 
             }
             return 0;
-                
-            
+
+            //
+        }
+        public static int ShowCustomers()
+        {
+
+            using (var connection = SqlClientModel.GetNewSqlConnection())
+            using (var command = new SqlCommand("Select * from Customers" , connection))
+
+            {
+                connection.Open();
+
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    Console.WriteLine($"Id: {reader["Id"]}," +
+                              $"FirstName: {reader["FirstName"]}," +
+                              $"LastName: {reader["LastName"]}," +
+                             $"MiddleName: {reader["MiddleName"]}," +
+                               $"DateOfBirth{reader["DateOfBirth"]}," +
+                            $"DocumentNumber{reader["DocumentNumber"]}");
+                }
+                return 0;
+
+
+
+
+            }
+           
+
+
+
+
 
         }
 
 
-        
 
     }
 }

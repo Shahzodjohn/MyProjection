@@ -1,5 +1,6 @@
 ﻿using MyProjection.folder;
 using System;
+using System.Data.SqlClient;
 
 namespace MyProjection
 {
@@ -13,7 +14,7 @@ namespace MyProjection
 
                 switch (ShowMainMenu())
                 {
-                    case "1":
+                    case "1": 
                         {
                             ShowCustomerMenu();
                         }break;
@@ -33,39 +34,47 @@ namespace MyProjection
                         }
                         break;
                 }
-
-                switch (ShowCustomerMenu())
+                bool isWorking2 = true;
+                while (isWorking2)
                 {
-                    case "1":
-                        {
-                            
-                        }
-                        break;
-                    case "2":
-                        {
-
-                           var customerModel = CreateCustomerModel();
-                           var result = customerModel.CreateCustomer();
-                            if (result > 0)
+                    switch (ShowCustomerMenu())
+                    {
+                        case "1":
                             {
-                                Console.WriteLine("Customer is added successfully");
+
+                                Customer.ShowCustomers();
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadLine();
+
                             }
-                            Console.WriteLine("Press any key to continue...");
-                            Console.ReadLine();
-                        }
-                        break;
-                    case "3":
-                        {
+                            break;
+                        case "2":
+                            {
+                                Console.Clear();
+                                var customerModel = CreateCustomerModel();
+                                var result = customerModel.CreateCustomer();
+                                if (result > 0)
+                                {
+                                    Console.WriteLine("Customer is added successfully");
+                                }
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadLine();
+                            }
+                            break;
+                        case "3":
+                            {
 
-                        }
-                        break;
-                    case "4":
-                        isWorking = false;
-                        {
+                            }
+                            break;
+                        case "4":
+                            isWorking = false;
+                            {
 
-                        }
-                        break;
+                            }
+                            break;
+                    }
                 }
+                
 
             }
             
@@ -120,9 +129,8 @@ namespace MyProjection
                 Console.WriteLine($"Creating customer ERROR {ex.Message}");
             }
             return null;
-            
-            
         }
+       
         static string ConsoleWriteWithResult(string text)
         {
             Console.Write(text);
