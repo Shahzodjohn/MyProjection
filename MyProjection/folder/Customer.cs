@@ -60,8 +60,8 @@ namespace MyProjection.folder
                 while (reader.Read())
                 {
 
-                    Console.WriteLine($"Id: {reader["Id"]}," +
-                              $"FirstName: {reader["FirstName"]}," +
+                    Console.WriteLine($"Id: {reader["Id"]},\n" +
+                              $"FirstName: {reader["FirstName"]} " +
                               $"LastName: {reader["LastName"]}," +
                              $"MiddleName: {reader["MiddleName"]}," +
                                $"DateOfBirth{reader["DateOfBirth"]}," +

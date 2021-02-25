@@ -42,7 +42,7 @@ namespace MyProjection
                         case "1":
                             {
 
-                                Customer.ShowCustomers();
+                                //Customer.ShowCustomers();
                                 Console.WriteLine("Press any key to continue...");
                                 Console.ReadLine();
 
@@ -51,14 +51,56 @@ namespace MyProjection
                         case "2":
                             {
                                 Console.Clear();
-                                var customerModel = CreateCustomerModel();
-                                var result = customerModel.CreateCustomer();
-                                if (result > 0)
+                                int run;
+                                Console.WriteLine("(1) Войти как админ \n(2) Войти как клиент");
+                                run = int.Parse(Console.ReadLine());
+                                if (run == 1)
                                 {
-                                    Console.WriteLine("Customer is added successfully");
+                                    string log = "alifbank" ;
+                                    Console.Write("Введите Логин = ");
+                                    log = Console.ReadLine();
+                                    string pas;
+                                    Console.Write("Введите Пароль = ");
+                                    pas = Console.ReadLine();
+                                    if (log == "alifbank" && pas == "2014")
+                                    {
+                                        Console.Clear();
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine($"{new string('-', 5)}Admin Menu{new string('-', 5)}");
+                                        Console.ForegroundColor = ConsoleColor.White;
+                                        Console.Write("1. Insert Client\n" +
+                                                          "2. Select Client\n" +
+                                                          "3. Update Client\n" +
+                                                          "4. Delete Client\n" +
+                                                          "4. Choice:");
+                                        int num = int.Parse(Console.ReadLine());
+                                        
+                                        if (num == 1)
+                                        {
+                                            var customerModel = CreateCustomerClient();
+                                            var result = customerModel.CreateCustomer();
+                                            if (result > 0)
+                                            {
+                                                Console.WriteLine("Customer is added successfully");
+                                            }
+                                            Console.WriteLine("Press any key to continue...");
+                                            Console.ReadLine();
+                                        }
+                                        
+                                    }
+                                    if (run == 2)
+                                    {
+                                        var customerModel = CreateCustomerClient();
+                                        var result = customerModel.CreateCustomer();
+                                        if (result > 0)
+                                        {
+                                            Console.WriteLine("Customer is added successfully");
+                                        }
+                                        Console.WriteLine("Press any key to continue...");
+                                        Console.ReadLine();
+                                    }
                                 }
-                                Console.WriteLine("Press any key to continue...");
-                                Console.ReadLine();
+                                
                             }
                             break;
                         case "3":
@@ -96,6 +138,7 @@ namespace MyProjection
             return Console.ReadLine();
         }
 
+        
         static string ShowCustomerMenu()
         {
             Console.Clear();
@@ -109,16 +152,16 @@ namespace MyProjection
                               "4. Choice:");
             return Console.ReadLine();
         }
-        static Customer CreateCustomerModel()
+        static Customer CreateCustomerClient()
         {
-            Console.WriteLine("Where * is Required");
+            Console.WriteLine("Client Registering (Where * is required)");
             try
             {
                 return new Customer
                 {
                     FirstName = ConsoleWriteWithResult("FirstName *:"),
-                    LastName = ConsoleWriteWithResult("LastName *:"),
-                    MiddleName = ConsoleWriteWithResult("MiddleName *:"),
+                    LastName = ConsoleWriteWithResult("LastName :"),
+                    MiddleName = ConsoleWriteWithResult("MiddleName :"),
                     DateOfBirth = DateTime.Parse(ConsoleWriteWithResult("DateOfBirth yyyy-mm-dd *:")),
                     DocumentNumber = ConsoleWriteWithResult("DocumentNumber *:"),
                 };
