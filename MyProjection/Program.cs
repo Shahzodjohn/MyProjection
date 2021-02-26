@@ -44,7 +44,7 @@ namespace MyProjection
                         case "1":
                             {
 
-                                //Customer.ShowCustomers();
+                                Customer.ShowCustomers();
                                 Console.WriteLine("Press any key to continue...");
                                 Console.ReadLine();
 
@@ -54,10 +54,11 @@ namespace MyProjection
                             {
                                 Console.Clear();
                                 int run;
-                                Console.Write("(1) Войти как админ \n(2) Войти как клиент \nChoice = ");
+                                Console.Write("(1) Войти как админ \n(2) Зарегистрироваться \nChoice = ");
                                 run = int.Parse(Console.ReadLine());
                                 if (run == 1)
                                 {
+                                    Console.Clear();
                                     Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Вход в базу администрации...");
                                     Console.ForegroundColor = ConsoleColor.White;
@@ -74,14 +75,16 @@ namespace MyProjection
                                         Console.WriteLine($"{new string('-', 5)}Admin Menu{new string('-', 5)}");
                                         Console.ForegroundColor = ConsoleColor.White;
                                         Console.Write("1. Insert Client\n" +
-                                                          "2. Select Client\n" +
-                                                          "3. Update Client\n" +
-                                                          "4. Delete Client\n" +
-                                                          "4. Choice:");
+                                                          "2. Select all Clients\n" +
+                                                          "3. Select by Id \n" +
+                                                          "4. Update Client\n" +
+                                                          "5. Delete Client\n" +
+                                                          "5. Choice:");
                                         int num = int.Parse(Console.ReadLine());
 
                                         if (num == 1)
                                         {
+                                            Console.Clear();
                                             var customerModel = CreateCustomerClient();
                                             var result = customerModel.CreateCustomer();
                                             if (result > 0)
@@ -91,9 +94,22 @@ namespace MyProjection
                                             Console.WriteLine("Press any key to continue...");
                                             Console.ReadLine();
                                         }
+                                        if (num == 2)
+                                        {
+                                            Customer.ShowCustomers();
+                                            Console.WriteLine("Press any key to continue...");
+                                            Console.ReadLine();
+                                        }
+                                        if (num == 3)
+                                        {
+                                            Customer.ShowCutromerIdmethod();
+                                            Console.WriteLine("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
                                     }
                                     else
                                     {
+                                        Console.Clear();
                                         Console.ForegroundColor = ConsoleColor.DarkRed;
                                         Console.WriteLine("Ошибка! Введите правильный пароль...");
                                         Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -122,9 +138,9 @@ namespace MyProjection
                             }
                             break;
                         case "4":
-                            isWorking = false;
                             {
-
+                                 ShowCustomerMenu();
+                                
                             }
                             break;
                     }
@@ -161,10 +177,14 @@ namespace MyProjection
             Console.Write("1. Show Customers\n" +
                               "2. Create Customer\n" +
                               "3. Find Customers\n" +
-                              "4. Back \n" +
+                              "4. EXIT \n" +
                               "4. Choice:");
             return Console.ReadLine();
         }
+
+
+
+
         static Customer CreateCustomerClient()
         {
             Console.WriteLine("Client Registering (Where * is required)");
@@ -177,6 +197,8 @@ namespace MyProjection
                     MiddleName = ConsoleWriteWithResult("MiddleName :"),
                     DateOfBirth = DateTime.Parse(ConsoleWriteWithResult("DateOfBirth yyyy-mm-dd *:")),
                     DocumentNumber = ConsoleWriteWithResult("DocumentNumber *:"),
+                    Login = ConsoleWriteWithResult("Login *:"),
+                    Password = ConsoleWriteWithResult("Password *:"),
                 };
             }
             catch (Exception ex)
