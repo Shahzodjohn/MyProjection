@@ -81,10 +81,9 @@ namespace MyProjection.folder
         }
         public static int ShowCustomersId(int Id)
         {
-            
-            using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand($"Select * from Customer where Id = {Id}" + Id, connection))
 
+            using (var connection = SqlClientModel.GetNewSqlConnection())
+            using (var command = new SqlCommand($"Select * from Customers where Id = {Id}", connection))
             {
                 connection.Open();
 
@@ -92,22 +91,19 @@ namespace MyProjection.folder
                 while (reader.Read())
                 {
 
-                    Console.WriteLine($"Id: {reader["Id"]},\n" +
-                              $"FirstName: {reader["FirstName"]} " +
-                              $"LastName: {reader["LastName"]}," +
-                             $"MiddleName: {reader["MiddleName"]}," +
-                               $"DateOfBirth{reader["DateOfBirth"]}," +
-                            $"DocumentNumber{reader["DocumentNumber"]}");
-                    
-                    
-                }
-                return 0;
-                
+                    Console.WriteLine($"Id: {reader["Id"]}, \n" +
+                              $"FirstName: {reader["FirstName"]},  " +
+                              $"LastName: {reader["LastName"]},  " +
+                             $"MiddleName: {reader["MiddleName"]},  " +
+                               $"DateOfBirth{reader["DateOfBirth"]},  " +
+                            $"DocumentNumber{reader["DocumentNumber"]}  ");
 
+
+                }
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
-
+            return 0;
         }
 
         public static int ShowCutromerIdmethod()
@@ -119,9 +115,113 @@ namespace MyProjection.folder
 
             return ShowCustomersId(Id);
 
+        }
+        public int UpdateCustomer()
+        {
+
+            using (var connection = SqlClientModel.GetNewSqlConnection())
+            using (var command = new SqlCommand("Update Customers set FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, DateOfBirth = @DateOfBirth, DocumentNumber = @DocumentNumber, Login = @Login, Password = @Password " +
+                "where Id = @Id", connection))
+
+            {
+                try
+                {
+
+                    command.Parameters.AddWithValue("FirstName", this.FirstName);
+                    command.Parameters.AddWithValue("LastName", this.LastName);
+                    command.Parameters.AddWithValue("MiddleName", this.MiddleName);
+                    command.Parameters.AddWithValue("DateOfBirth", this.DateOfBirth);
+                    command.Parameters.AddWithValue("DocumentNumber", this.DocumentNumber);
+                    command.Parameters.AddWithValue("Login", this.Login);
+                    command.Parameters.AddWithValue("Password", this.Password);
+                    command.Parameters.AddWithValue("Id", this.Id);
+                    connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    return result;
 
 
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR  {ex.Message}");
+                    Console.ReadLine();
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+
+
+            }
+            return 0;
+
+
+            //
+
+
+        }
+
+        //
+
+        public static void DeleteCustomer()
+        {
+
+            using (var connection = SqlClientModel.GetNewSqlConnection())
+            using (var command = new SqlCommand("Delete Customers where Id = @Id ", connection))
+
+            {
+
+
+                try
+                {
+
+                    Console.Write("Введите ID пользователя которого хотите удалить = ");
+                    int Id = int.Parse(Console.ReadLine());
+                    command.Parameters.AddWithValue("Id", Id);
+                    connection.Open();
+                    var result = command.ExecuteNonQuery(); 
+                    if (result > 0)
+                    {
+                        Console.WriteLine("This User is successfully deleted");
+                    }
+                    if (result <= 0)
+                    {
+                        Console.WriteLine("Error while deleting a User");
+                    }
+                    
+
+                    
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERROR  {ex.Message}");
+                    Console.ReadLine();
+                }
+                finally
+                {
+                    connection.Close();
+
+                }
+                Console.ReadKey();
+
+
+
+            };
 
         }
     }
 }
+
+             
+
+
+        
+                    
+           
+
+                    
+
+
