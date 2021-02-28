@@ -9,6 +9,9 @@ namespace MyProjection.folder
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
+        public string Gender { get; set; }
+        public string MaritalStatus { get; set; }
+        public string Citizenship { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string DocumentNumber { get; set; }
         public string Login { get; set; }
@@ -17,8 +20,8 @@ namespace MyProjection.folder
         public int CreateCustomer()
         {
             using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand("Insert into Customers(FirstName, LastName, MiddleName, DateOfBirth, DocumentNumber, Login, Password)" +
-                " Values(@FirstName, @LastName, @MiddleName, @DateOfBirth, @DocumentNumber, @Login, @Password)", connection))
+            using (var command = new SqlCommand("Insert into Customers(FirstName, LastName, MiddleName, Gender, MaritalStatus, Citizenship, DateOfBirth, DocumentNumber, Login, Password)" +
+                " Values(@FirstName, @LastName, @MiddleName, @Gender, @MaritalStatus, @Citizenship, @DateOfBirth, @DocumentNumber, @Login, @Password)", connection))
 
             {
                 try
@@ -26,6 +29,9 @@ namespace MyProjection.folder
                     command.Parameters.AddWithValue("FirstName", this.FirstName);
                     command.Parameters.AddWithValue("LastName", this.LastName);
                     command.Parameters.AddWithValue("MiddleName", this.MiddleName);
+                    command.Parameters.AddWithValue("Gender", this.Gender);
+                    command.Parameters.AddWithValue("MaritalStatus", this.MaritalStatus);
+                    command.Parameters.AddWithValue("Citizenship", this.Citizenship);
                     command.Parameters.AddWithValue("DateOfBirth", this.DateOfBirth);
                     command.Parameters.AddWithValue("DocumentNumber", this.DocumentNumber);
                     command.Parameters.AddWithValue("Login", this.Login);
@@ -68,20 +74,18 @@ namespace MyProjection.folder
                               $"FirstName: {reader["FirstName"]} " +
                               $"LastName: {reader["LastName"]}," +
                              $"MiddleName: {reader["MiddleName"]}," +
+                             $"Gender: {reader["Gender"]}," +
+                             $"MaritalStatus: {reader["MaritalStatus"]}," +
+                             $"Citizenship: {reader["Citizenship"]}," +
                                $"DateOfBirth{reader["DateOfBirth"]}," +
                             $"DocumentNumber{reader["DocumentNumber"]}");
                 }
                 return 0;
-
-
-
-
             }
 
         }
         public static int ShowCustomersId(int Id)
         {
-
             using (var connection = SqlClientModel.GetNewSqlConnection())
             using (var command = new SqlCommand($"Select * from Customers where Id = {Id}", connection))
             {
@@ -96,6 +100,9 @@ namespace MyProjection.folder
                               $"LastName: {reader["LastName"]},  " +
                              $"MiddleName: {reader["MiddleName"]},  " +
                                $"DateOfBirth{reader["DateOfBirth"]},  " +
+                               $"Gender: {reader["Gender"]}," +
+                               $"MaritalStatus: {reader["MaritalStatus"]}," +
+                             $"Citizenship: {reader["Citizenship"]}," +
                             $"DocumentNumber{reader["DocumentNumber"]}  ");
 
 
@@ -112,15 +119,13 @@ namespace MyProjection.folder
             int Id;
             Console.Write("Id = ");
             Id = int.Parse(Console.ReadLine());
-
             return ShowCustomersId(Id);
-
         }
         public int UpdateCustomer()
         {
 
             using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand("Update Customers set FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, DateOfBirth = @DateOfBirth, DocumentNumber = @DocumentNumber, Login = @Login, Password = @Password " +
+            using (var command = new SqlCommand("Update Customers set FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, Gender = @Gender, MaritalStatus = @MaritalStatus, Citizenship = @Citizenship, DateOfBirth = @DateOfBirth, DocumentNumber = @DocumentNumber, Login = @Login, Password = @Password " +
                 "where Id = @Id", connection))
 
             {
@@ -130,6 +135,9 @@ namespace MyProjection.folder
                     command.Parameters.AddWithValue("FirstName", this.FirstName);
                     command.Parameters.AddWithValue("LastName", this.LastName);
                     command.Parameters.AddWithValue("MiddleName", this.MiddleName);
+                    command.Parameters.AddWithValue("Gender", this.Gender);
+                    command.Parameters.AddWithValue("MaritalStatus", this.MaritalStatus);
+                    command.Parameters.AddWithValue("Citizenship", this.Citizenship);
                     command.Parameters.AddWithValue("DateOfBirth", this.DateOfBirth);
                     command.Parameters.AddWithValue("DocumentNumber", this.DocumentNumber);
                     command.Parameters.AddWithValue("Login", this.Login);
@@ -156,13 +164,9 @@ namespace MyProjection.folder
             }
             return 0;
 
-
-            //
-
-
         }
 
-        //
+
 
         public static void DeleteCustomer()
         {
@@ -171,8 +175,6 @@ namespace MyProjection.folder
             using (var command = new SqlCommand("Delete Customers where Id = @Id ", connection))
 
             {
-
-
                 try
                 {
 
