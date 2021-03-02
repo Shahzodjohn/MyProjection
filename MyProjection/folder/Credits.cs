@@ -14,14 +14,15 @@ namespace MyProjection.folder
         public string Citizenship { get; set; }
         public double TheSumOfWholeIncomes { get; set; }
         public int ExpiryOfCreditHistory { get; set; }
+        public string CreditHistory { get; set; }
         public string CreditGoal { get; set; }
         public DateTime CreditDeadLine { get; set; }
 
         public int CreateCreditModel()
         {
             using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand("Insert into Credits(Gender, MaritalStatus, Age, Citizenship, TheSumOfWholeIncomes, ExpiryOfCreditHistory, CreditGoal, CreditDeadLine)" +
-                " Values(@Gender, @MaritalStatus, @Age, @Citizenship, @TheSumOfWholeIncomes, @ExpiryOfCreditHistory, @CreditGoal, @CreditDeadLine)", connection))
+            using (var command = new SqlCommand("Insert into Credits(Gender, MaritalStatus, Age, Citizenship, TheSumOfWholeIncomes, ExpiryOfCreditHistory, CreditHistory,CreditGoal, CreditDeadLine)" +
+                " Values(@Gender, @MaritalStatus, @Age, @Citizenship, @TheSumOfWholeIncomes, @ExpiryOfCreditHistory,@CreditHistory , @CreditGoal, @CreditDeadLine)", connection))
 
             {
                 try
@@ -32,8 +33,11 @@ namespace MyProjection.folder
                     command.Parameters.AddWithValue("Citizenship", this.Citizenship);
                     command.Parameters.AddWithValue("TheSumOfWholeIncomes", this.TheSumOfWholeIncomes);
                     command.Parameters.AddWithValue("ExpiryOfCreditHistory", this.ExpiryOfCreditHistory);
+                    command.Parameters.AddWithValue("CreditHistory", this.CreditHistory);
                     command.Parameters.AddWithValue("CreditGoal", this.CreditGoal);
                     command.Parameters.AddWithValue("CreditDeadLine", this.CreditDeadLine);
+
+
 
 
                     connection.Open();
@@ -43,6 +47,8 @@ namespace MyProjection.folder
                 catch (Exception ex)
                 {
                     Console.WriteLine($"ERROR  {ex.Message}");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadLine();
 
                 }
                 finally
@@ -57,35 +63,7 @@ namespace MyProjection.folder
 
             
         }
-        public static Credits CreateCredit()
-        {
-            try
-            {
-                return new Credits
-                {
-                    Gender = ConsoleWriteWithResult("Gender = "),
-                    MaritalStatus = ConsoleWriteWithResult("Marital Status = "),
-                    Age = Convert.ToInt32(ConsoleWriteWithResult("Age = ")),
-                    Citizenship = ConsoleWriteWithResult("Citizenship = "),
-                    TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteWithResult("The Summ Of Whole Incomes = ")),
-                    ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteWithResult("Expiry of Credit History = ")),
-                    CreditGoal = ConsoleWriteWithResult("Credit Goal"),
-                    CreditDeadLine = Convert.ToDateTime(ConsoleWriteWithResult("Credit DeadLine"))
-                };
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Occured an error while creating an application {ex.Message}");
-
-            };
-            return null;
-
-            static string ConsoleWriteWithResult(string text)
-            {
-                Console.Write(text);
-                return Console.ReadLine();
-            }
-        }
+        
     }
 }
 

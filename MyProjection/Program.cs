@@ -184,7 +184,21 @@ namespace MyProjection
                                             {
                                                 case "1":
                                                     {
-                                                        Credits.CreateCredit();
+                                                        /* вызов метода CreateCredit()
+                                                         */
+                                                        Console.Clear();
+                                                        var CreditModel = CreateCredit();
+                                                        var result = CreditModel.CreateCreditModel();
+                                                        if (result > 0)
+                                                        {
+                                                            Console.WriteLine("Application is sucessfully accepted!");
+                                                            Console.ForegroundColor = ConsoleColor.Green;
+                                                            Console.WriteLine("Press any key to continue ... ");
+                                                            Console.ForegroundColor = ConsoleColor.White;
+                                                            Console.ReadKey();
+                                                        }
+                                                        Console.WriteLine("Press any key to continue...");
+                                                        Console.ReadLine();
                                                     }
                                                     break;
                                             }
@@ -212,12 +226,12 @@ namespace MyProjection
                         }
                         break;
 
-                    case "3":
-                        {
-                            ShowCustomerMenu();
+                    //case "3":
+                    //    {
+                    //        ShowCustomerMenu();
 
-                        }
-                        break;
+                    //    }
+                    //    break;
                 }
 
             }
@@ -225,8 +239,10 @@ namespace MyProjection
             {
                 case "1":
                     {
-                        Credits credits = Credits.CreateCredit();
-                        credits.CreateCreditModel();
+                        CreateCredit();
+                        
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadLine();
                     }
                     break;
             }
@@ -260,13 +276,16 @@ namespace MyProjection
         }
 
 
-        static Customer CreateCustomerClient()
+        public static Customer CreateCustomerClient()
         {
+
             Console.WriteLine("Client Registering (Where * is required)");
             try
             {
+                
                 return new Customer
                 {
+                    
                     FirstName = ConsoleWriteWithResult("FirstName *:"),
                     LastName = ConsoleWriteWithResult("LastName :"),
                     MiddleName = ConsoleWriteWithResult("MiddleName :"),
@@ -274,6 +293,7 @@ namespace MyProjection
                     Citizenship = ConsoleWriteWithResult("Citizenship :"),
                     DateOfBirth = DateTime.Parse(ConsoleWriteWithResult("DateOfBirth yyyy-mm-dd *:")),
                     DocumentNumber = ConsoleWriteWithResult("DocumentNumber *:"),
+                    MaritalStatus = ConsoleWriteWithResult("MaritalStatus *:"),
                     Login = ConsoleWriteWithResult("Login *:"),
                     Password = ConsoleWriteWithResult("Password *:"),
                 };
@@ -290,6 +310,110 @@ namespace MyProjection
         {
             Console.Write(text);
             return Console.ReadLine();
+        }
+
+        static Credits CreateCredit()
+        {
+            try
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Please Fill an application once more fully...");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                
+                {
+                    Gender = ConsoleWriteWithResult("Gender = "),
+                    MaritalStatus = ConsoleWriteWithResult("Marital Status = "),
+                    Age = Convert.ToInt32(ConsoleWriteWithResult("Age = ")),
+                    Citizenship = ConsoleWriteWithResult("Citizenship = "),
+                    TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteWithResult("The Credit Summ Of Whole Incomes = ")),
+                    ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteWithResult("Expiry of Credit History = ")),
+                    CreditHistory = ConsoleWriteWithResult("Credit History = "),
+                    CreditGoal = ConsoleWriteWithResult("Credit Goal = "),
+                    CreditDeadLine = Convert.ToDateTime(ConsoleWriteWithResult("Credit DeadLine (2000-12-02) = "))
+                };
+                int point = 0;
+                string Gender;
+                if (Gender == "Male") { point = point + 1; }
+
+                if (Gender == "Female") { point = point + 2; }
+
+                string MaritalStatus;
+                if (MaritalStatus == "Single") { point = point + 1; }
+
+                if (MaritalStatus == "Married") { point = point + 2; }
+
+                if (MaritalStatus == "Diversed") { point = point + 1; }
+                //Вдовец
+                if (MaritalStatus == "Widow") { point = point + 2; }
+
+                int Age;
+                if (Age <= 25) { point = point + 0; }
+
+                if (Age >= 26 && Age <= 35) { point = point + 1; }
+
+                if (Age >= 36 && Age <= 62) { point = point + 2; }
+
+                if (Age > 63) { point = point + 1; }
+
+                string Citizenship;
+                if (Citizenship == "Tajik") { point = point + 1; }
+
+                if (Citizenship == "Tajikistan") { point = point + 1; }
+
+                else point = point + 0;
+
+                int TheSumOfWholeIncomes;
+
+                //int eight = ((TheSumOfWholeIncomes * 0.8) / 100);
+
+                //if (TheSumOfWholeIncomes == )
+                //if (TheSumOfWholeIncomes =)
+                int CreditHistory;
+                if (CreditHistory > 3) { point = point + 2; }
+                if (CreditHistory == 1 && CreditHistory == 3) { point = point + 1; }
+
+                int ExpiryOfCreditHistory;
+                if (ExpiryOfCreditHistory > 7) { point = point + (-3); }
+                if (ExpiryOfCreditHistory == 5 && ExpiryOfCreditHistory == 6 && ExpiryOfCreditHistory == 7) { point = point + (-2); }
+                if (ExpiryOfCreditHistory == 4) { point = point + (-1); }
+                if (ExpiryOfCreditHistory >= 1 && ExpiryOfCreditHistory <= 3) { point = point + 0; }
+
+                int CreditGoal;
+                Console.WriteLine("1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее");
+                if (CreditGoal == 1)
+                {
+                    point = point + 2;
+                }
+                if (CreditGoal == 2) { point = point + 1; }
+                if (CreditGoal == 3) { point = point + 0; }
+                if (CreditGoal == 4) { point = point + (-1); }
+
+                Console.WriteLine("Result = " + point);
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                if (point >= 11) { Console.WriteLine("Поздравляем! Ваш кредит одобрен!"); }
+                Console.ForegroundColor = ConsoleColor.Red;
+                if (point <= 10) { Console.WriteLine("К сожалению, в данный момент мы не можем вам кредит!"); }
+                Console.ForegroundColor = ConsoleColor.White;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Occured an error while creating an application {ex.Message}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadLine();
+
+            };
+            return null;
+
+            static string ConsoleWriteWithResult(string text)
+            {
+                Console.Write(text);
+                return Console.ReadLine();
+            }
         }
     }
 }
