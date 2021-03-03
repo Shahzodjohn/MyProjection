@@ -321,7 +321,7 @@ namespace MyProjection
                 Console.WriteLine("Please Fill an application once more fully...");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                
+                Credits rep = new Credits()
                 {
                     Gender = ConsoleWriteWithResult("Gender = "),
                     MaritalStatus = ConsoleWriteWithResult("Marital Status = "),
@@ -329,66 +329,78 @@ namespace MyProjection
                     Citizenship = ConsoleWriteWithResult("Citizenship = "),
                     TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteWithResult("The Credit Summ Of Whole Incomes = ")),
                     ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteWithResult("Expiry of Credit History = ")),
-                    CreditHistory = ConsoleWriteWithResult("Credit History = "),
-                    CreditGoal = ConsoleWriteWithResult("Credit Goal = "),
-                    CreditDeadLine = Convert.ToDateTime(ConsoleWriteWithResult("Credit DeadLine (2000-12-02) = "))
+                    CreditHistory = Convert.ToInt32(ConsoleWriteWithResult("Credit History = ")),
+                    CreditGoal = Convert.ToInt32(ConsoleWriteWithResult("Credit Goal = ")),
+                    CreditDeadLine = Convert.ToInt32(ConsoleWriteWithResult("Credit DeadLine (2000-12-02) = "))
                 };
-                int point = 0;
-                string Gender;
-                if (Gender == "Male") { point = point + 1; }
+                int point = 1;
+                string Gender = null;
+                if (rep.Gender == "Male") { point = point + 1; }
 
-                if (Gender == "Female") { point = point + 2; }
+                if (rep.Gender == "Female") { point = point + 2; }
 
-                string MaritalStatus;
-                if (MaritalStatus == "Single") { point = point + 1; }
+                string MaritalStatus = null;
+                if (rep.MaritalStatus == "Single") { point = point + 1; }
 
-                if (MaritalStatus == "Married") { point = point + 2; }
+                if (rep.MaritalStatus == "Married") { point = point + 2; }
 
-                if (MaritalStatus == "Diversed") { point = point + 1; }
+                if (rep.MaritalStatus == "Diversed") { point = point + 1; }
                 //Вдовец
-                if (MaritalStatus == "Widow") { point = point + 2; }
+                if (rep.MaritalStatus == "Widow") { point = point + 2; }
 
-                int Age;
-                if (Age <= 25) { point = point + 0; }
+                int Age = 0;
+                if (rep.Age <= 25) { point = point + 0; }
 
-                if (Age >= 26 && Age <= 35) { point = point + 1; }
+                if (rep.Age >= 26 && rep.Age <= 35) { point = point + 1; }
 
-                if (Age >= 36 && Age <= 62) { point = point + 2; }
+                if (rep.Age >= 36 && rep.Age <= 62) { point = point + 2; }
 
-                if (Age > 63) { point = point + 1; }
+                if (rep.Age > 63) { point = point + 1; }
 
-                string Citizenship;
-                if (Citizenship == "Tajik") { point = point + 1; }
+                string Citizenship = null;
+                if (rep.Citizenship == "Tajik") { point = point + 1; }
 
-                if (Citizenship == "Tajikistan") { point = point + 1; }
+                if (rep.Citizenship == "Tajikistan") { point = point + 1; }
 
                 else point = point + 0;
 
-                int TheSumOfWholeIncomes;
+                
+                Console.WriteLine("Your income sum = ");
+                int income = int.Parse(Console.ReadLine());
 
-                //int eight = ((TheSumOfWholeIncomes * 0.8) / 100);
+                if (rep.TheSumOfWholeIncomes * 100 / income <= 80) { point = point + 4; }
+                if (rep.TheSumOfWholeIncomes * 100 / income >= 80 && income <= 150) { point = point + 3; }
+                if (rep.TheSumOfWholeIncomes * 100 / income >= 150 && income <= 250) { point = point + 2; }
+                if (rep.TheSumOfWholeIncomes * 100 / income > 250) { point = point + 1; }
 
-                //if (TheSumOfWholeIncomes == )
-                //if (TheSumOfWholeIncomes =)
-                int CreditHistory;
-                if (CreditHistory > 3) { point = point + 2; }
-                if (CreditHistory == 1 && CreditHistory == 3) { point = point + 1; }
+                
+                int CreditHistory = 0 ;
+                if (rep.CreditHistory >= 3) { point = point + 2; }
+                if (rep.CreditHistory >= 1 && rep.CreditHistory <= 3) { point = point + 1; }
 
-                int ExpiryOfCreditHistory;
-                if (ExpiryOfCreditHistory > 7) { point = point + (-3); }
-                if (ExpiryOfCreditHistory == 5 && ExpiryOfCreditHistory == 6 && ExpiryOfCreditHistory == 7) { point = point + (-2); }
-                if (ExpiryOfCreditHistory == 4) { point = point + (-1); }
-                if (ExpiryOfCreditHistory >= 1 && ExpiryOfCreditHistory <= 3) { point = point + 0; }
+                int ExpiryOfCreditHistory = 0;
+                if (rep.ExpiryOfCreditHistory > 7) {point = point + (-3);}
+                if (rep.ExpiryOfCreditHistory == 5 && rep.ExpiryOfCreditHistory == 6 && rep.ExpiryOfCreditHistory == 7) { point = point + (-2); }
+                if (rep.ExpiryOfCreditHistory == 4) {point = point + (-1);}
+                if (rep.ExpiryOfCreditHistory >= 1 && rep.ExpiryOfCreditHistory <= 3) { point = point + 0; }
 
                 int CreditGoal;
                 Console.WriteLine("1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее");
-                if (CreditGoal == 1)
+                CreditGoal = Convert.ToInt32(Console.ReadLine());
+                if (rep.CreditGoal == 1)
                 {
                     point = point + 2;
                 }
-                if (CreditGoal == 2) { point = point + 1; }
-                if (CreditGoal == 3) { point = point + 0; }
-                if (CreditGoal == 4) { point = point + (-1); }
+                if (rep.CreditGoal == 2) { point = point + 1; }
+                if (rep.CreditGoal == 3) { point = point + 0; }
+                if (rep.CreditGoal == 4) { point = point + (-1);}
+
+                int CreditDeadLine;
+                CreditDeadLine = Convert.ToInt32(rep.CreditDeadLine);
+                if (rep.CreditDeadLine > 12) { point = point + 1; }
+                if (rep.CreditDeadLine < 12) { point = point + 1; }
+
+
 
                 Console.WriteLine("Result = " + point);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;

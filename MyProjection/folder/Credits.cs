@@ -14,9 +14,9 @@ namespace MyProjection.folder
         public string Citizenship { get; set; }
         public double TheSumOfWholeIncomes { get; set; }
         public int ExpiryOfCreditHistory { get; set; }
-        public string CreditHistory { get; set; }
-        public string CreditGoal { get; set; }
-        public DateTime CreditDeadLine { get; set; }
+        public int CreditHistory { get; set; }
+        public int CreditGoal { get; set; }
+        public int CreditDeadLine { get; set; }
 
         public int CreateCreditModel()
         {
