@@ -201,6 +201,13 @@ namespace MyProjection
                                                         Console.ReadLine();
                                                     }
                                                     break;
+                                                case "2":
+                                                    {
+                                                        Credits.ShowCodeId();
+                                                        Console.WriteLine("Press any key to continue...");
+                                                        Console.ReadKey();
+                                                    }
+                                                    break;
                                             }
                                         }
                                         else
@@ -286,16 +293,16 @@ namespace MyProjection
                 return new Customer
                 {
                     
-                    FirstName = ConsoleWriteWithResult("FirstName *:"),
-                    LastName = ConsoleWriteWithResult("LastName :"),
-                    MiddleName = ConsoleWriteWithResult("MiddleName :"),
-                    Gender = ConsoleWriteWithResult("Gender :"),
-                    Citizenship = ConsoleWriteWithResult("Citizenship :"),
-                    DateOfBirth = DateTime.Parse(ConsoleWriteWithResult("DateOfBirth yyyy-mm-dd *:")),
-                    DocumentNumber = ConsoleWriteWithResult("DocumentNumber *:"),
-                    MaritalStatus = ConsoleWriteWithResult("MaritalStatus *:"),
-                    Login = ConsoleWriteWithResult("Login *:"),
-                    Password = ConsoleWriteWithResult("Password *:"),
+                    FirstName = ConsoleWriteWithResult("FirstName *: "),
+                    LastName = ConsoleWriteWithResult("LastName : "),
+                    MiddleName = ConsoleWriteWithResult("MiddleName : "),
+                    Gender = ConsoleWriteWithResult("Gender : "), 
+                    Citizenship = ConsoleWriteWithResult("Citizenship : "),
+                    DateOfBirth = DateTime.Parse(ConsoleWriteWithResult("DateOfBirth yyyy-mm-dd *: ")),
+                    DocumentNumber = ConsoleWriteWithResult("DocumentNumber *: "),
+                    MaritalStatus = ConsoleWriteWithResult("MaritalStatus *: "),
+                    Login = ConsoleWriteWithResult("Login *: "),
+                    Password = ConsoleWriteWithResult("Password *: "),
                 };
             }
             catch (Exception ex)
@@ -331,7 +338,7 @@ namespace MyProjection
                     TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteLineWithResult("The Credit Summ Of Whole Incomes = ")),
                     ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteLineWithResult("Expiry of Credit History = ")),
                     CreditHistory = Convert.ToInt32(ConsoleWriteLineWithResult("Credit History = ")),
-                    CreditGoal = Convert.ToInt32(ConsoleWriteLineWithResult("Your CreditGoal = 1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее \nChoice = ")),
+                    CreditGoal = Convert.ToInt32(ConsoleWriteLineWithResult("Your CreditGoal = \n1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее \nChoice = ")),
                     CreditDeadLine = Convert.ToInt32(ConsoleWriteLineWithResult("Credit DeadLine = "))
                 };
                 int point = 1;

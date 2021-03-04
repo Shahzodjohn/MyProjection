@@ -6,6 +6,7 @@ namespace MyProjection.folder
     public class Customer
     {
         public int Id { get; set; }
+        public int CreditId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
@@ -96,13 +97,13 @@ namespace MyProjection.folder
                 {
 
                     Console.WriteLine($"Id: {reader["Id"]}, \n" +
-                              $"FirstName: {reader["FirstName"]},  " +
-                              $"LastName: {reader["LastName"]},  " +
-                             $"MiddleName: {reader["MiddleName"]},  " +
-                               $"DateOfBirth{reader["DateOfBirth"]},  " +
-                               $"Gender: {reader["Gender"]}," +
-                               $"MaritalStatus: {reader["MaritalStatus"]}," +
-                             $"Citizenship: {reader["Citizenship"]}," +
+                              $"FirstName: {reader["FirstName"]},  \n" +
+                              $"LastName: {reader["LastName"]},  \n" +
+                             $"MiddleName: {reader["MiddleName"]},  \n" +
+                               $"DateOfBirth{reader["DateOfBirth"]},  \n" +
+                               $"Gender: {reader["Gender"]},\n" +
+                               $"MaritalStatus: {reader["MaritalStatus"]},\n" +
+                             $"Citizenship: {reader["Citizenship"]},\n" +
                             $"DocumentNumber{reader["DocumentNumber"]}  ");
 
 

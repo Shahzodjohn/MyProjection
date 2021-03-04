@@ -55,15 +55,53 @@ namespace MyProjection.folder
                 {
                     connection.Close();
                 }
-
-
-
             }
             return 0;
-
-            
         }
-        
+        public static int CodeId(int Login)
+        {
+           
+            using (var connection = SqlClientModel.GetNewSqlConnection())
+            using (var command = new SqlCommand($"select * from Customers c left join Credits cr on c.Id = cr.ClientId where c.Login = {Login}", connection))
+            {
+                connection.Open();
+
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    Console.WriteLine($"Id: {reader["Id"]},\n" +
+                                      $"FirstName: {reader["FirstName"]} \n" +
+                                      $"LastName: {reader["LastName"]}," +
+                                      $"MiddleName: {reader["MiddleName"]}, \n" + 
+                                      $"MaritalStatus: {reader["MaritalStatus"]},\n" +
+                                      $"Gender: {reader["Gender"]}, \n" +
+                                      $"DocumentNumber{reader["DocumentNumber"]},\n" + 
+                                      $"MaritalStatus: {reader["MaritalStatus"]}, \n" +
+                                      $"Age: {reader["Age"]}, \n" +
+                                      $"Citizenship: {reader["Citizenship"]},  \n" +
+                                      $"TheSumOfWholeIncomes{reader["TheSumOfWholeIncomes"]},  \n" +
+                                      $"ExpiryOfCreditHistory: {reader["ExpiryOfCreditHistory"]}, \n" +
+                                      $"CreditHistory: {reader["CreditHistory"]}, \n" +
+                                      $"CreditGoal: {reader["CreditGoal"]}, \n" +
+                                      $"CreditDeadLine{reader["CreditDeadLine"]}"); 
+
+
+                }
+            }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return 0;
+        }
+        public static int ShowCodeId()
+        {
+
+            int Login;
+            Console.Write("Please enter your login once more = ");
+            Login = int.Parse(Console.ReadLine());
+            return CodeId(Login);
+        }
+
     }
 }
 
