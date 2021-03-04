@@ -303,7 +303,7 @@ namespace MyProjection
 
                 Console.WriteLine($"Creating customer ERROR {ex.Message}");
             }
-            return null;
+            return null ;
         }
 
         static string ConsoleWriteWithResult(string text)
@@ -316,6 +316,7 @@ namespace MyProjection
         {
             try
             {
+                
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Please Fill an application once more fully...");
@@ -323,23 +324,23 @@ namespace MyProjection
 
                 Credits rep = new Credits()
                 {
-                    Gender = ConsoleWriteWithResult("Gender = "),
-                    MaritalStatus = ConsoleWriteWithResult("Marital Status = "),
-                    Age = Convert.ToInt32(ConsoleWriteWithResult("Age = ")),
-                    Citizenship = ConsoleWriteWithResult("Citizenship = "),
-                    TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteWithResult("The Credit Summ Of Whole Incomes = ")),
-                    ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteWithResult("Expiry of Credit History = ")),
-                    CreditHistory = Convert.ToInt32(ConsoleWriteWithResult("Credit History = ")),
-                    CreditGoal = Convert.ToInt32(ConsoleWriteWithResult("Credit Goal = ")),
-                    CreditDeadLine = Convert.ToInt32(ConsoleWriteWithResult("Credit DeadLine (2000-12-02) = "))
+                    Gender = ConsoleWriteLineWithResult("Gender = "),
+                    MaritalStatus = ConsoleWriteLineWithResult("Marital Status = "),
+                    Age = Convert.ToInt32(ConsoleWriteLineWithResult("Age = ")),
+                    Citizenship = ConsoleWriteLineWithResult("Citizenship = "),
+                    TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteLineWithResult("The Credit Summ Of Whole Incomes = ")),
+                    ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteLineWithResult("Expiry of Credit History = ")),
+                    CreditHistory = Convert.ToInt32(ConsoleWriteLineWithResult("Credit History = ")),
+                    CreditGoal = Convert.ToInt32(ConsoleWriteLineWithResult("Your CreditGoal = 1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее \nChoice = ")),
+                    CreditDeadLine = Convert.ToInt32(ConsoleWriteLineWithResult("Credit DeadLine = "))
                 };
                 int point = 1;
-                string Gender = null;
+
                 if (rep.Gender == "Male") { point = point + 1; }
 
                 if (rep.Gender == "Female") { point = point + 2; }
 
-                string MaritalStatus = null;
+
                 if (rep.MaritalStatus == "Single") { point = point + 1; }
 
                 if (rep.MaritalStatus == "Married") { point = point + 2; }
@@ -348,7 +349,7 @@ namespace MyProjection
                 //Вдовец
                 if (rep.MaritalStatus == "Widow") { point = point + 2; }
 
-                int Age = 0;
+
                 if (rep.Age <= 25) { point = point + 0; }
 
                 if (rep.Age >= 26 && rep.Age <= 35) { point = point + 1; }
@@ -357,14 +358,14 @@ namespace MyProjection
 
                 if (rep.Age > 63) { point = point + 1; }
 
-                string Citizenship = null;
+
                 if (rep.Citizenship == "Tajik") { point = point + 1; }
 
                 if (rep.Citizenship == "Tajikistan") { point = point + 1; }
 
                 else point = point + 0;
 
-                
+
                 Console.WriteLine("Your income sum = ");
                 int income = int.Parse(Console.ReadLine());
 
@@ -373,45 +374,42 @@ namespace MyProjection
                 if (rep.TheSumOfWholeIncomes * 100 / income >= 150 && income <= 250) { point = point + 2; }
                 if (rep.TheSumOfWholeIncomes * 100 / income > 250) { point = point + 1; }
 
-                
-                int CreditHistory = 0 ;
+
+
                 if (rep.CreditHistory >= 3) { point = point + 2; }
                 if (rep.CreditHistory >= 1 && rep.CreditHistory <= 3) { point = point + 1; }
 
-                int ExpiryOfCreditHistory = 0;
-                if (rep.ExpiryOfCreditHistory > 7) {point = point + (-3);}
-                if (rep.ExpiryOfCreditHistory == 5 && rep.ExpiryOfCreditHistory == 6 && rep.ExpiryOfCreditHistory == 7) { point = point + (-2); }
-                if (rep.ExpiryOfCreditHistory == 4) {point = point + (-1);}
-                if (rep.ExpiryOfCreditHistory >= 1 && rep.ExpiryOfCreditHistory <= 3) { point = point + 0; }
 
-                int CreditGoal;
-                Console.WriteLine("1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее");
-                CreditGoal = Convert.ToInt32(Console.ReadLine());
-                if (rep.CreditGoal == 1)
-                {
-                    point = point + 2;
-                }
+                if (rep.CreditGoal == 1) { point = point + 2; }
+                
                 if (rep.CreditGoal == 2) { point = point + 1; }
                 if (rep.CreditGoal == 3) { point = point + 0; }
-                if (rep.CreditGoal == 4) { point = point + (-1);}
+                if (rep.CreditGoal == 4) { point = point + (-1); }
 
-                int CreditDeadLine;
-                CreditDeadLine = Convert.ToInt32(rep.CreditDeadLine);
+                
+                if (rep.ExpiryOfCreditHistory > 7) { point = point + (-3); }
+                if (rep.ExpiryOfCreditHistory == 5 && rep.ExpiryOfCreditHistory == 6 && rep.ExpiryOfCreditHistory == 7) { point = point + (-2); }
+                if (rep.ExpiryOfCreditHistory == 4) { point = point + (-1); }
+                if (rep.ExpiryOfCreditHistory >= 1 && rep.ExpiryOfCreditHistory <= 3) { point = point + 0; }
+
+
+
+                
+                rep.CreditDeadLine = Convert.ToInt32(rep.CreditDeadLine);
                 if (rep.CreditDeadLine > 12) { point = point + 1; }
                 if (rep.CreditDeadLine < 12) { point = point + 1; }
 
 
-
+                Credits credits = new Credits();
                 Console.WriteLine("Result = " + point);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (point >= 11) { Console.WriteLine("Поздравляем! Ваш кредит одобрен!"); }
+                if (point >= 11) {Console.WriteLine("Поздравляем! Ваш кредит одобрен!"); }
                 Console.ForegroundColor = ConsoleColor.Red;
                 if (point <= 10) { Console.WriteLine("К сожалению, в данный момент мы не можем вам кредит!"); }
                 Console.ForegroundColor = ConsoleColor.White;
-
-
-
+                return rep;
             }
+            
             catch (Exception ex)
             {
                 Console.WriteLine($"Occured an error while creating an application {ex.Message}");
@@ -419,13 +417,15 @@ namespace MyProjection
                 Console.ReadLine();
 
             };
-            return null;
+            return new Credits();
+            
+            
 
-            static string ConsoleWriteWithResult(string text)
-            {
-                Console.Write(text);
-                return Console.ReadLine();
-            }
+        }
+        static string ConsoleWriteLineWithResult(string text)
+        {
+            Console.Write(text);
+            return Console.ReadLine();
         }
     }
 }

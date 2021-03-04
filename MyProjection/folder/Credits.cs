@@ -21,8 +21,8 @@ namespace MyProjection.folder
         public int CreateCreditModel()
         {
             using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand("Insert into Credits(Gender, MaritalStatus, Age, Citizenship, TheSumOfWholeIncomes, ExpiryOfCreditHistory, CreditHistory,CreditGoal, CreditDeadLine)" +
-                " Values(@Gender, @MaritalStatus, @Age, @Citizenship, @TheSumOfWholeIncomes, @ExpiryOfCreditHistory,@CreditHistory , @CreditGoal, @CreditDeadLine)", connection))
+            using (var command = new SqlCommand("Insert into Credits(Gender, MaritalStatus, Age, Citizenship, TheSumOfWholeIncomes, ExpiryOfCreditHistory, CreditHistory, CreditGoal, CreditDeadLine)" +
+                " Values(@Gender, @MaritalStatus, @Age, @Citizenship, @TheSumOfWholeIncomes, @ExpiryOfCreditHistory, @CreditHistory , @CreditGoal, @CreditDeadLine)", connection))
 
             {
                 try

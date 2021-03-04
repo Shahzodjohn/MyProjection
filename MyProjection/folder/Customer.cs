@@ -177,7 +177,7 @@ namespace MyProjection.folder
             {
                 try
                 {
-
+                     
                     Console.Write("Введите ID пользователя которого хотите удалить = ");
                     int Id = int.Parse(Console.ReadLine());
                     command.Parameters.AddWithValue("Id", Id);
