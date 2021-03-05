@@ -15,7 +15,7 @@ namespace MyProjection.folder
         public double TheSumOfWholeIncomes { get; set; }
         public int ExpiryOfCreditHistory { get; set; }
         public int CreditHistory { get; set; }
-        public int CreditGoal { get; set; }
+        public string CreditGoal { get; set; }
         public int CreditDeadLine { get; set; }
 
         public int CreateCreditModel()
@@ -62,7 +62,13 @@ namespace MyProjection.folder
         {
            
             using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand($"select * from Customers c left join Credits cr on c.Id = cr.ClientId where c.Login = {Login}", connection))
+            using (var command = new SqlCommand($"select * from Customers c " +
+                                                $"join " +
+                                                $"Credits cr " +
+                                                $"on " +
+                                                $"c.Id = cr.ClientId " +
+                                                $"where " +
+                                                $"c.Login = {Login}", connection))
             {
                 connection.Open();
 
@@ -72,7 +78,7 @@ namespace MyProjection.folder
 
                     Console.WriteLine($"Id: {reader["Id"]},\n" +
                                       $"FirstName: {reader["FirstName"]} \n" +
-                                      $"LastName: {reader["LastName"]}," +
+                                      $"LastName: {reader["LastName"]}, \n" +
                                       $"MiddleName: {reader["MiddleName"]}, \n" + 
                                       $"MaritalStatus: {reader["MaritalStatus"]},\n" +
                                       $"Gender: {reader["Gender"]}, \n" +
@@ -84,7 +90,7 @@ namespace MyProjection.folder
                                       $"ExpiryOfCreditHistory: {reader["ExpiryOfCreditHistory"]}, \n" +
                                       $"CreditHistory: {reader["CreditHistory"]}, \n" +
                                       $"CreditGoal: {reader["CreditGoal"]}, \n" +
-                                      $"CreditDeadLine{reader["CreditDeadLine"]}"); 
+                                      $"CreditDeadLine{reader["CreditDeadLine"]}\n"); 
 
 
                 }
@@ -97,7 +103,9 @@ namespace MyProjection.folder
         {
 
             int Login;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Please enter your login once more = ");
+            Console.ForegroundColor = ConsoleColor.White;
             Login = int.Parse(Console.ReadLine());
             return CodeId(Login);
         }

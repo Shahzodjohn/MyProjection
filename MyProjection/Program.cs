@@ -13,23 +13,18 @@ namespace MyProjection
             {
                 switch (ShowCustomerMenu())
                 {
-                    case "0":
-                        {
-                            #region
-                            //Customer.ShowCustomers();
-                            //Console.WriteLine("Press any key to continue...");
-                            //Console.ReadLine();
-                            #endregion
-
-
-
-                        }
-                        break;
+                    
                     case "1":
                         {
                             Console.Clear();
                             int run;
-                            Console.Write("(1) Войти как админ \n(2) Зарегистрироваться \n(3) Войти как клиент \nChoice = ");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"{new string('-', 5)}Login Menu{new string('-', 5)}");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write("(1) Sign in as an administrator \n" +
+                                          "(2) Sign up \n" +
+                                          "(3) Sign in as a client \n" +
+                                          "Choice = ");
                             run = int.Parse(Console.ReadLine());
                             if (run == 1)
                             {
@@ -233,12 +228,7 @@ namespace MyProjection
                         }
                         break;
 
-                    //case "3":
-                    //    {
-                    //        ShowCustomerMenu();
-
-                    //    }
-                    //    break;
+                    
                 }
 
             }
@@ -260,7 +250,7 @@ namespace MyProjection
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{new string('-', 5)}Customers Menu{new string('-', 5)}");
+            Console.WriteLine($"{new string('-', 5)}Main Menu{new string('-', 5)}");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("1. Logging or Registering a new account \n" +
                               "2. EXIT \n" +
@@ -289,7 +279,7 @@ namespace MyProjection
             Console.WriteLine("Client Registering (Where * is required)");
             try
             {
-                
+                Console.Clear();
                 return new Customer
                 {
                     
@@ -329,6 +319,7 @@ namespace MyProjection
                 Console.WriteLine("Please Fill an application once more fully...");
                 Console.ForegroundColor = ConsoleColor.White;
 
+                
                 Credits rep = new Credits()
                 {
                     Gender = ConsoleWriteLineWithResult("Gender = "),
@@ -338,38 +329,42 @@ namespace MyProjection
                     TheSumOfWholeIncomes = Convert.ToDouble(ConsoleWriteLineWithResult("The Credit Summ Of Whole Incomes = ")),
                     ExpiryOfCreditHistory = Convert.ToInt32(ConsoleWriteLineWithResult("Expiry of Credit History = ")),
                     CreditHistory = Convert.ToInt32(ConsoleWriteLineWithResult("Credit History = ")),
-                    CreditGoal = Convert.ToInt32(ConsoleWriteLineWithResult("Your CreditGoal = \n1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее \nChoice = ")),
+                    CreditGoal = ConsoleWriteLineWithResult("Your CreditGoal = \n1 - Бытовая техника \n2 - Ремонт \n3 - Телефон \n4 - Прочее \nChoice = "),
                     CreditDeadLine = Convert.ToInt32(ConsoleWriteLineWithResult("Credit DeadLine = "))
+                    
+
                 };
                 int point = 1;
+                Console.WriteLine($"{new string('*', 12) }");
+                
 
                 if (rep.Gender == "Male") { point = point + 1; }
-
+                else point = point + 0;
                 if (rep.Gender == "Female") { point = point + 2; }
-
+                else point = point + 0;
 
                 if (rep.MaritalStatus == "Single") { point = point + 1; }
-
+                else point = point + 0;
                 if (rep.MaritalStatus == "Married") { point = point + 2; }
-
+                else point = point + 0;
                 if (rep.MaritalStatus == "Diversed") { point = point + 1; }
+                else point = point + 0;
                 //Вдовец
                 if (rep.MaritalStatus == "Widow") { point = point + 2; }
-
+                else point = point + 0;
 
                 if (rep.Age <= 25) { point = point + 0; }
-
+                else point = point + 0;
                 if (rep.Age >= 26 && rep.Age <= 35) { point = point + 1; }
-
+                else point = point + 0;
                 if (rep.Age >= 36 && rep.Age <= 62) { point = point + 2; }
-
+                else point = point + 0;
                 if (rep.Age > 63) { point = point + 1; }
-
+                else point = point + 0;
 
                 if (rep.Citizenship == "Tajik") { point = point + 1; }
-
+                else point = point + 0;
                 if (rep.Citizenship == "Tajikistan") { point = point + 1; }
-
                 else point = point + 0;
 
 
@@ -386,14 +381,25 @@ namespace MyProjection
                 if (rep.CreditHistory >= 3) { point = point + 2; }
                 if (rep.CreditHistory >= 1 && rep.CreditHistory <= 3) { point = point + 1; }
 
+               
 
-                if (rep.CreditGoal == 1) { point = point + 2; }
-                
-                if (rep.CreditGoal == 2) { point = point + 1; }
-                if (rep.CreditGoal == 3) { point = point + 0; }
-                if (rep.CreditGoal == 4) { point = point + (-1); }
+                //if (rep.CreditGoal == "1") { point = point + 2; }
+                //if (rep.CreditGoal == "2") { point = point + 1; }
+                //if (rep.CreditGoal == "3") { point = point + 0; }
+                //if (rep.CreditGoal == "4") { point = point + (-1); }
+               
+                //switch (Console.ReadLine())
+                //{
+                //    case '1':
+                //}
+                //string v = Console.ReadLine();
+                if (rep.CreditGoal == "1") { rep.CreditGoal = "Bitovaya Tekhnika"; point = point + 2;}
+                if (rep.CreditGoal == "2") { rep.CreditGoal = "Remont"; point = point + 1;}
+                if (rep.CreditGoal == "3") { rep.CreditGoal = "Telephone";point = point + 0;}
+                if (rep.CreditGoal == "4") {rep.CreditGoal = "Prochee"; point = point + (-1); }
 
-                
+
+
                 if (rep.ExpiryOfCreditHistory > 7) { point = point + (-3); }
                 if (rep.ExpiryOfCreditHistory == 5 && rep.ExpiryOfCreditHistory == 6 && rep.ExpiryOfCreditHistory == 7) { point = point + (-2); }
                 if (rep.ExpiryOfCreditHistory == 4) { point = point + (-1); }
@@ -401,7 +407,6 @@ namespace MyProjection
 
 
 
-                
                 rep.CreditDeadLine = Convert.ToInt32(rep.CreditDeadLine);
                 if (rep.CreditDeadLine > 12) { point = point + 1; }
                 if (rep.CreditDeadLine < 12) { point = point + 1; }
@@ -410,9 +415,9 @@ namespace MyProjection
                 Credits credits = new Credits();
                 Console.WriteLine("Result = " + point);
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                if (point >= 11) {Console.WriteLine("Поздравляем! Ваш кредит одобрен!"); }
+                if (point > 11) {Console.WriteLine("Поздравляем! Ваш кредит одобрен!"); }
                 Console.ForegroundColor = ConsoleColor.Red;
-                if (point <= 10) { Console.WriteLine("К сожалению, в данный момент мы не можем вам кредит!"); }
+                if (point < 12) {Console.WriteLine("К сожалению, в данный момент мы не можем выдать вам кредит!");}
                 Console.ForegroundColor = ConsoleColor.White;
                 return rep;
             }
@@ -423,6 +428,7 @@ namespace MyProjection
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadLine();
 
+                
             };
             return new Credits();
             
