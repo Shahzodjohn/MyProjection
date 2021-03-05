@@ -78,8 +78,8 @@ namespace MyProjection.folder
                              $"Gender: {reader["Gender"]}," +
                              $"MaritalStatus: {reader["MaritalStatus"]}," +
                              $"Citizenship: {reader["Citizenship"]}," +
-                               $"DateOfBirth{reader["DateOfBirth"]}," +
-                            $"DocumentNumber{reader["DocumentNumber"]}");
+                               $"DateOfBirth: {reader["DateOfBirth"]}," +
+                            $"DocumentNumber: {reader["DocumentNumber"]}");
                 }
                 return 0;
             }

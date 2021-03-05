@@ -77,20 +77,65 @@ namespace MyProjection.folder
                 {
 
                     Console.WriteLine($"Id: {reader["Id"]},\n" +
-                                      $"FirstName: {reader["FirstName"]} \n" +
-                                      $"LastName: {reader["LastName"]}, \n" +
-                                      $"MiddleName: {reader["MiddleName"]}, \n" + 
-                                      $"MaritalStatus: {reader["MaritalStatus"]},\n" +
+                                      $"First Name: {reader["FirstName"]} \n" +
+                                      $"Last Name: {reader["LastName"]}, \n" +
+                                      $"Middle Name: {reader["MiddleName"]}, \n" + 
                                       $"Gender: {reader["Gender"]}, \n" +
-                                      $"DocumentNumber{reader["DocumentNumber"]},\n" + 
-                                      $"MaritalStatus: {reader["MaritalStatus"]}, \n" +
+                                      $"Document Number: {reader["DocumentNumber"]},\n" + 
+                                      $"Marital Status: {reader["MaritalStatus"]}, \n" +
                                       $"Age: {reader["Age"]}, \n" +
                                       $"Citizenship: {reader["Citizenship"]},  \n" +
-                                      $"TheSumOfWholeIncomes{reader["TheSumOfWholeIncomes"]},  \n" +
-                                      $"ExpiryOfCreditHistory: {reader["ExpiryOfCreditHistory"]}, \n" +
-                                      $"CreditHistory: {reader["CreditHistory"]}, \n" +
-                                      $"CreditGoal: {reader["CreditGoal"]}, \n" +
-                                      $"CreditDeadLine{reader["CreditDeadLine"]}\n"); 
+                                      $"The Sum Of Whole Incomes: {reader["TheSumOfWholeIncomes"]},  \n" +
+                                      $"Expiry Of Credit History: {reader["ExpiryOfCreditHistory"]}, \n" +
+                                      $"Credit History: {reader["CreditHistory"]}, \n" +
+                                      $"Credit Goal: {reader["CreditGoal"]}, \n" +
+                                      $"Credit DeadLine: {reader["CreditDeadLine"]} \n"); 
+
+
+                }
+            }
+            Console.WriteLine("Press any key to continue... ");
+            Console.ReadKey();
+            return 0;
+        }
+        public static int ShowCodeId()
+        {
+            Console.Clear();
+            int Login;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Please enter your login once more = ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Login = int.Parse(Console.ReadLine());
+            return CodeId(Login);
+        }
+        public static int MyloanLogin(int Login)
+        {
+            using (var connection = SqlClientModel.GetNewSqlConnection())
+            using (var command = new SqlCommand($"select * from Customers c " +
+                                                $"join " +
+                                                $"Credits cr " +
+                                                $"on " +
+                                                $"c.Id = cr.ClientId " +
+                                                $"where " +
+                                                $"c.Login = {Login}", connection))
+            {
+                connection.Open();
+
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    Console.WriteLine($"First Name: {reader["FirstName"]} \n" +
+                                      $"Last Name: {reader["LastName"]}, \n" +
+                                      $"Middle Name: {reader["MiddleName"]}, \n" +
+                                      $"Document Number: {reader["DocumentNumber"]},\n" +
+                                      $"Marital Status: {reader["MaritalStatus"]}, \n" +
+                                      $"Age: {reader["Age"]}, \n" +
+                                      $"The Sum Of Whole Incomes: {reader["TheSumOfWholeIncomes"]},  \n" +
+                                      $"Expiry Of Credit History: {reader["ExpiryOfCreditHistory"]}, \n" +
+                                      $"Credit History: {reader["CreditHistory"]}, \n" +
+                                      $"Credit Goal: {reader["CreditGoal"]}, \n" +
+                                      $"CreditDeadLine: {reader["CreditDeadLine"]} \n");
 
 
                 }
@@ -99,16 +144,14 @@ namespace MyProjection.folder
             Console.ReadKey();
             return 0;
         }
-        public static int ShowCodeId()
-        {
+            public static int MyLoanLoginShow()
+            {
 
-            int Login;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Please enter your login once more = ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Login = int.Parse(Console.ReadLine());
-            return CodeId(Login);
-        }
+                int Login;
+                Console.Write("Login = ");
+                Login = int.Parse(Console.ReadLine());
+                return MyloanLogin(Login);
+            }
 
     }
 }

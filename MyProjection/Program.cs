@@ -203,6 +203,11 @@ namespace MyProjection
                                                         Console.ReadKey();
                                                     }
                                                     break;
+                                                case "3":
+                                                    {
+                                                        Credits.MyLoanLoginShow();
+                                                    }
+                                                    break;
                                             }
                                         }
                                         else
@@ -227,22 +232,23 @@ namespace MyProjection
                             }
                         }
                         break;
+                   
 
                     
                 }
 
             }
-            switch (CustomerMenu())
-            {
-                case "1":
-                    {
-                        CreateCredit();
+            //switch (CustomerMenu())
+            //{
+            //    case "1":
+            //        {
+            //            CreateCredit();
                         
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadLine();
-                    }
-                    break;
-            }
+            //            Console.WriteLine("Press any key to continue...");
+            //            Console.ReadLine();
+            //        }
+            //        break;
+            //}
 
         }
 
@@ -335,22 +341,20 @@ namespace MyProjection
 
                 };
                 int point = 1;
-                Console.WriteLine($"{new string('*', 12) }");
                 
+                if (rep.Gender == "Male" || rep.Gender == "male" ) { point = point + 1; }
+                else point = point + 0;
+                if (rep.Gender == "Female" || rep.Gender == "female") { point = point + 2; }
+                else point = point + 0;
 
-                if (rep.Gender == "Male") { point = point + 1; }
+                if (rep.MaritalStatus == "Single" || rep.MaritalStatus == "single") { point = point + 1; }
                 else point = point + 0;
-                if (rep.Gender == "Female") { point = point + 2; }
+                if (rep.MaritalStatus == "Married" || rep.MaritalStatus == "married") { point = point + 2; }
                 else point = point + 0;
-
-                if (rep.MaritalStatus == "Single") { point = point + 1; }
-                else point = point + 0;
-                if (rep.MaritalStatus == "Married") { point = point + 2; }
-                else point = point + 0;
-                if (rep.MaritalStatus == "Diversed") { point = point + 1; }
+                if (rep.MaritalStatus == "Diversed" || rep.MaritalStatus == "diversed") { point = point + 1; }
                 else point = point + 0;
                 //Вдовец
-                if (rep.MaritalStatus == "Widow") { point = point + 2; }
+                if (rep.MaritalStatus == "Widow" || rep.MaritalStatus == "widow") { point = point + 2; }
                 else point = point + 0;
 
                 if (rep.Age <= 25) { point = point + 0; }
@@ -393,6 +397,9 @@ namespace MyProjection
                 //    case '1':
                 //}
                 //string v = Console.ReadLine();
+
+
+
                 if (rep.CreditGoal == "1") { rep.CreditGoal = "Bitovaya Tekhnika"; point = point + 2;}
                 if (rep.CreditGoal == "2") { rep.CreditGoal = "Remont"; point = point + 1;}
                 if (rep.CreditGoal == "3") { rep.CreditGoal = "Telephone";point = point + 0;}
