@@ -126,7 +126,7 @@ namespace MyProjection.folder
         {
 
             using (var connection = SqlClientModel.GetNewSqlConnection())
-            using (var command = new SqlCommand("Update Customers set FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, Gender = @Gender, MaritalStatus = @MaritalStatus, Citizenship = @Citizenship, DateOfBirth = @DateOfBirth, DocumentNumber = @DocumentNumber, Login = @Login, Password = @Password " +
+            using (var command = new SqlCommand("Update Customers set FirstName = @FirstName, LastName = @LastName, MiddleName = @MiddleName, MaritalStatus = @MaritalStatus, Citizenship = @Citizenship, DocumentNumber = @DocumentNumber, Login = @Login, Password = @Password " +
                 "where Id = @Id", connection))
 
             {
@@ -136,10 +136,8 @@ namespace MyProjection.folder
                     command.Parameters.AddWithValue("FirstName", this.FirstName);
                     command.Parameters.AddWithValue("LastName", this.LastName);
                     command.Parameters.AddWithValue("MiddleName", this.MiddleName);
-                    command.Parameters.AddWithValue("Gender", this.Gender);
                     command.Parameters.AddWithValue("MaritalStatus", this.MaritalStatus);
-                    command.Parameters.AddWithValue("Citizenship", this.Citizenship);
-                    command.Parameters.AddWithValue("DateOfBirth", this.DateOfBirth);
+                    command.Parameters.AddWithValue("Citizenship", this.Citizenship);                    
                     command.Parameters.AddWithValue("DocumentNumber", this.DocumentNumber);
                     command.Parameters.AddWithValue("Login", this.Login);
                     command.Parameters.AddWithValue("Password", this.Password);

@@ -80,22 +80,25 @@ namespace MyProjection
                                         try
                                         {
                                             Customer cust = new Customer();
-                                            Console.WriteLine("Enter Customer Id:");
+                                            Console.WriteLine("Enter Customer Id: ");
                                             cust.Id = int.Parse(Console.ReadLine());
-                                            Console.WriteLine("Enter new Fist Name for Customer:");
+                                            Console.WriteLine("Enter new Fist Name for Customer: ");
                                             cust.FirstName = Convert.ToString(Console.ReadLine());
-                                            Console.WriteLine("Enter new Last Name:");
+                                            Console.WriteLine("Enter new Last Name: ");
                                             cust.LastName = Convert.ToString(Console.ReadLine());
-                                            Console.WriteLine("Enter new Middle Name:");
+                                            Console.WriteLine("Enter new Middle Name: ");
                                             cust.MiddleName = Convert.ToString(Console.ReadLine());
-                                            Console.WriteLine("Enter new Login:");
-                                            cust.Login = Convert.ToString(Console.ReadLine());
-                                            Console.WriteLine("Enter new Password:");
-                                            cust.Password = Convert.ToString(Console.ReadLine());
-                                            Console.WriteLine("Enter new Documment Number:");
+                                            Console.WriteLine("Enter new Marital Status: ");
+                                            cust.MaritalStatus = Convert.ToString(Console.ReadLine());
+                                            Console.WriteLine("Enter new Citizenship: ");
+                                            cust.Citizenship = Convert.ToString(Console.ReadLine());
+                                            Console.WriteLine("Enter new Documment Number: ");
                                             cust.DocumentNumber = Convert.ToString(Console.ReadLine());
-                                            Console.WriteLine("Enter new Date Of Birth:");
-                                            cust.DateOfBirth = DateTime.Parse(Console.ReadLine());
+                                            Console.WriteLine("Enter new Login: ");
+                                            cust.Login = Convert.ToString(Console.ReadLine());
+                                            Console.WriteLine("Enter new Password: ");
+                                            cust.Password = Convert.ToString(Console.ReadLine());
+                                            
                                             cust.UpdateCustomer();
 
                                             Console.WriteLine("The Customer is successfully added!");
@@ -237,17 +240,19 @@ namespace MyProjection
                 }
 
             }
+            #region
             //switch (CustomerMenu())
             //{
             //    case "1":
             //        {
             //            CreateCredit();
-                        
+
             //            Console.WriteLine("Press any key to continue...");
             //            Console.ReadLine();
             //        }
             //        break;
             //}
+            #endregion
 
         }
 
@@ -305,7 +310,7 @@ namespace MyProjection
 
                 Console.WriteLine($"Creating customer ERROR {ex.Message}");
             }
-            return null ;
+            return null;
         }
 
         static string ConsoleWriteWithResult(string text)
