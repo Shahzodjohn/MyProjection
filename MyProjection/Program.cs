@@ -61,8 +61,7 @@ namespace MyProjection
                                         {
                                             Console.WriteLine("Customer is added successfully");
                                         }
-                                        Console.WriteLine("Press any key to continue...");
-                                        Console.ReadLine();
+                                        
                                     }
                                     if (num == 2)
                                     {
@@ -372,7 +371,7 @@ namespace MyProjection
                 else point = point + 0;
 
 
-                Console.WriteLine("Your income sum = ");
+                Console.Write("Your income sum = ");
                 int income = int.Parse(Console.ReadLine());
 
                 if (rep.TheSumOfWholeIncomes * 100 / income <= 80) { point = point + 4; }
@@ -385,19 +384,19 @@ namespace MyProjection
                 if (rep.CreditHistory >= 3) { point = point + 2; }
                 if (rep.CreditHistory >= 1 && rep.CreditHistory <= 3) { point = point + 1; }
 
-               
 
+                #region
                 //if (rep.CreditGoal == "1") { point = point + 2; }
                 //if (rep.CreditGoal == "2") { point = point + 1; }
                 //if (rep.CreditGoal == "3") { point = point + 0; }
                 //if (rep.CreditGoal == "4") { point = point + (-1); }
-               
+
                 //switch (Console.ReadLine())
                 //{
                 //    case '1':
                 //}
                 //string v = Console.ReadLine();
-
+                #endregion
 
 
                 if (rep.CreditGoal == "1") { rep.CreditGoal = "Bitovaya Tekhnika"; point = point + 2;}

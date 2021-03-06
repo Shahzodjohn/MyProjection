@@ -135,7 +135,7 @@ namespace MyProjection.folder
                                       $"Expiry Of Credit History: {reader["ExpiryOfCreditHistory"]}, \n" +
                                       $"Credit History: {reader["CreditHistory"]}, \n" +
                                       $"Credit Goal: {reader["CreditGoal"]}, \n" +
-                                      $"CreditDeadLine: {reader["CreditDeadLine"]} \n");
+                                      $"Credit DeadLine: {reader["CreditDeadLine"]} \n");
 
 
                 }
